@@ -11,7 +11,8 @@
   "dependencies": {
     "bulma": "^0.7.1",
     "register-service-worker": "^1.0.0",
-    "vue": "^2.5.16"
+    "vue": "^2.5.16",
+    "xlsx": "^0.13.3"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.0-rc.8",
