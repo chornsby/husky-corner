@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "bulma": "^0.7.1",
-    "register-service-worker": "^1.0.0",
     "vue": "^2.5.16",
     "xlsx": "^0.13.3"
   },
