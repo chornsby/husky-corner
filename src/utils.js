@@ -1,5 +1,8 @@
 import XLSX from "xlsx";
 
+/**
+ * Convert a string into an array of columns for a single row in the output.
+ */
 const convertRowToCells = (row, index, episode) => {
   // Split using the delimiter as specified in the program
   row = row.split("<");
@@ -76,4 +79,10 @@ const readFileAsText = inputFile => {
   });
 };
 
-export { convertToWorkbook, downloadWorkbook, readFileAsText };
+export {
+  convertRowToCells,
+  convertStringToRows,
+  convertToWorkbook,
+  downloadWorkbook,
+  readFileAsText
+};
