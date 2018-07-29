@@ -3,7 +3,7 @@
     <nav class="navbar" aria-label="main navigation">
       <div class="navbar-brand">
         <a class="navbar-item" href="/">
-          <img src="/favicon.ico" alt="Husky Corner"/>
+          <img :src="favicon" alt="Husky Corner"/>
         </a>
         <div class="navbar-item">Husky Corner</div>
       </div>
@@ -58,12 +58,14 @@
 </template>
 
 <script>
+import favicon from "./assets/img/favicon.png";
 import { convertToWorkbook, downloadWorkbook, readFileAsText } from "./utils";
 
 export default {
   data: function() {
     return {
       episode: "",
+      favicon,
       inputContent: "",
       inputFilename: "",
       outputFilename: "output.xlsx"
