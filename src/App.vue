@@ -1,13 +1,6 @@
 <template>
   <div id="app">
-    <nav class="navbar" aria-label="main navigation">
-      <div class="navbar-brand">
-        <a class="navbar-item" href="/">
-          <img :src="favicon" alt="Husky Corner"/>
-        </a>
-        <div class="navbar-item">Husky Corner</div>
-      </div>
-    </nav>
+    <Navbar></Navbar>
     <section class="section">
       <div class="container">
         <h1 class="title">Convert a file</h1>
@@ -58,14 +51,16 @@
 </template>
 
 <script>
-import favicon from "./assets/img/favicon.png";
+import Navbar from "./components/Navbar";
 import { convertToWorkbook, downloadWorkbook, readFileAsText } from "./utils";
 
 export default {
+  components: {
+    Navbar
+  },
   data: function() {
     return {
       episode: "",
-      favicon,
       inputContent: "",
       inputFilename: "",
       outputFilename: "output.xlsx"
