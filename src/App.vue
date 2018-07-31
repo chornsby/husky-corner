@@ -1,17 +1,15 @@
 <template>
   <div id="app">
     <Navbar/>
-    <ConvertFileView/>
+    <router-view/>
   </div>
 </template>
 
 <script>
 import Navbar from "./components/Navbar";
-import ConvertFileView from "./views/ConvertFileView";
 
 export default {
   components: {
-    ConvertFileView,
     Navbar
   }
 };

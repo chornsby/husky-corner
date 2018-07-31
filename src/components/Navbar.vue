@@ -1,10 +1,15 @@
 <template>
   <nav class="navbar" aria-label="main navigation">
     <div class="navbar-brand">
-      <a class="navbar-item" href="/">
+      <router-link class="navbar-item" to="/">
         <img :src="favicon" alt="Husky Corner"/>
-      </a>
-      <div class="navbar-item">Husky Corner</div>
+      </router-link>
+      <router-link class="navbar-item" to="/">
+        Husky Corner
+      </router-link>
+      <router-link class="navbar-item" to="/convert">
+        Convert to Excel
+      </router-link>
     </div>
   </nav>
 </template>
