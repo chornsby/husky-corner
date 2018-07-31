@@ -1,17 +1,18 @@
 <template>
   <div id="app">
     <Navbar/>
-    <ConvertFilePage/>
+    <router-view/>
+    <Footer/>
   </div>
 </template>
 
 <script>
-import ConvertFilePage from "./components/ConvertFilePage";
+import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 
 export default {
   components: {
-    ConvertFilePage,
+    Footer,
     Navbar
   }
 };

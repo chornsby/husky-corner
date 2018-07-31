@@ -1,7 +1,7 @@
 <template>
   <section class="section">
     <div class="container">
-      <h1 class="title">Convert a file</h1>
+      <h1 class="title">Upload a file</h1>
       <p>
         This utility converts a file of text separated with
         <code>&lt;</code> characters into separate columns in an Excel
