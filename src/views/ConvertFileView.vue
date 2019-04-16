@@ -66,8 +66,15 @@ export default {
   },
   methods: {
     handleDownload: function() {
-      const outputWorkbook = convertToWorkbook(this.inputContent, this.episode);
-      downloadWorkbook(outputWorkbook, this.outputFilename);
+      try {
+        const outputWorkbook = convertToWorkbook(
+          this.inputContent,
+          this.episode
+        );
+        downloadWorkbook(outputWorkbook, this.outputFilename);
+      } catch (e) {
+        alert(e.message);
+      }
     },
     handleFile: async function(event) {
       // Display the input filename beside the button

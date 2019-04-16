@@ -3,15 +3,25 @@ import XLSX from "xlsx";
 /**
  * Convert a string into an array of columns for a single row in the output.
  */
-const convertRowToCells = (row, index, episode) => {
+const convertRowToCells = (rowText, index, episode) => {
   // Split using the delimiter as specified in the program
-  row = row.split("<");
+  const row = rowText.split("<");
 
   // Do not modify the header row
   if (index > 0) {
     // Grow the row to a minimum size
     while (row.length < 4) {
       row.push("");
+    }
+
+    // Validate that the timestamp is not missing
+    if (row[1].length === 0) {
+      // But it _can_ be missing for the synopsis!
+      if (row[0].toLowerCase() === "syno") {
+        console.log("Ignoring missing timestamp for synopsis");
+      } else {
+        throw new Error(`Check missing timestamp: ${rowText}`);
+      }
     }
 
     // Fix timestamps
