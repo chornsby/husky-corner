@@ -3,20 +3,20 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="/husky-corner/favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
     <title>Husky Corner</title>
 </head>
 <body>
 <nav class="navbar" aria-label="main navigation">
     <div class="navbar-brand">
-        <a class="navbar-item" href="/">
-            <img src="/img/favicon.png" alt="Husky Corner"/>
+        <a class="navbar-item" href="/husky-corner/">
+            <img src="/husky-corner/img/favicon.png" alt="Husky Corner"/>
         </a>
-        <a class="navbar-item" href="/">
+        <a class="navbar-item" href="/husky-corner/">
             Husky Corner
         </a>
-        <a class="navbar-item" href="/convert/">
+        <a class="navbar-item" href="/husky-corner/convert/">
             Convert to Excel
         </a>
     </div>
@@ -73,7 +73,7 @@
 </footer>
 <script type="application/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.2/xlsx.full.min.js"></script>
 <script type="module">
-    import {downloadWorkbook, convertToWorkbook, readFileAsText} from '/js/utils.mjs';
+    import {downloadWorkbook, convertToWorkbook, readFileAsText} from '/husky-corner/js/utils.mjs';
 
     const downloadButton = document.querySelector("#download-button");
     const fileInput = document.querySelector("#file-input");
