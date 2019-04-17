@@ -1,5 +1,3 @@
-import XLSX from "xlsx";
-
 /**
  * Convert a string into an array of columns for a single row in the output.
  */

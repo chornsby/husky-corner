@@ -1,6 +1,6 @@
-import { convertRowToCells, convertStringToRows } from "../../src/utils";
+const { convertRowToCells, convertStringToRows } = require("../public/js/utils.mjs");
 
-describe("utils", () => {
+describe("utils.mjs", () => {
   test("convertRowToCells converts header row", () => {
     expect(convertRowToCells("hahmo<timecode<repla<jakso<info", 0, "")).toEqual(
       ["hahmo", "timecode", "repla", "jakso", "info"]
