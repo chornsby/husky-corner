@@ -1,3 +1,5 @@
+const XLSX = require("xlsx");
+
 /**
  * Convert a string into an array of columns for a single row in the output.
  */
@@ -87,7 +89,7 @@ const readFileAsText = inputFile => {
   });
 };
 
-export {
+module.exports = {
   convertRowToCells,
   convertStringToRows,
   convertToWorkbook,

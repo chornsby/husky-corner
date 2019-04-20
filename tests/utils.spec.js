@@ -1,14 +1,20 @@
-const { convertRowToCells, convertStringToRows } = require("../public/js/utils.mjs");
+const o = require("mithril/ospec/ospec");
 
-describe("utils.mjs", () => {
-  test("convertRowToCells converts header row", () => {
-    expect(convertRowToCells("hahmo<timecode<repla<jakso<info", 0, "")).toEqual(
-      ["hahmo", "timecode", "repla", "jakso", "info"]
-    );
+const { convertRowToCells, convertStringToRows } = require("../src/utils.js");
+
+o.spec("utils.mjs", () => {
+  o("convertRowToCells converts header row", () => {
+    o(convertRowToCells("hahmo<timecode<repla<jakso<info", 0, "")).deepEquals([
+      "hahmo",
+      "timecode",
+      "repla",
+      "jakso",
+      "info"
+    ]);
   });
 
-  test("convertRowToCells converts short row", () => {
-    expect(convertRowToCells("KAD<01:00:35.12<Häh!", 1, "10")).toEqual([
+  o("convertRowToCells converts short row", () => {
+    o(convertRowToCells("KAD<01:00:35.12<Häh!", 1, "10")).deepEquals([
       "KAD",
       "01:00:35:12",
       "Häh!",
@@ -16,8 +22,8 @@ describe("utils.mjs", () => {
     ]);
   });
 
-  test("convertRowToCells converts long row", () => {
-    expect(convertRowToCells("KAD<01:00:35.12<Häh!<<01.23", 2, "")).toEqual([
+  o("convertRowToCells converts long row", () => {
+    o(convertRowToCells("KAD<01:00:35.12<Häh!<<01.23", 2, "")).deepEquals([
       "KAD",
       "01:00:35:12",
       "Häh!",
@@ -26,31 +32,34 @@ describe("utils.mjs", () => {
     ]);
   });
 
-  test("convertRowToCells throws error for missing timestamp", () => {
-    expect(() => convertRowToCells("KAD<<Häh!<<01.23", 3, "")).toThrow();
+  o("convertRowToCells throws error for missing timestamp", () => {
+    o(() => convertRowToCells("KAD<<Häh!<<01.23", 3, "")).throws(Error);
   });
 
-  test("convertRowToCells does not throw error for missing timestamp in synopsis", () => {
-    expect(convertRowToCells("Syno<<Häh!<<01.23", 4, "")).toEqual([
-      "Syno",
-      "",
-      "Häh!",
-      "",
-      "01.23"
-    ]);
+  o(
+    "convertRowToCells does not throw error for missing timestamp in synopsis",
+    () => {
+      o(convertRowToCells("Syno<<Häh!<<01.23", 4, "")).deepEquals([
+        "Syno",
+        "",
+        "Häh!",
+        "",
+        "01.23"
+      ]);
+    }
+  );
+
+  o("convertStringToRows removes empty lines", () => {
+    o(convertStringToRows("   \n      \n")).deepEquals([]);
   });
 
-  test("convertStringToRows removes empty lines", () => {
-    expect(convertStringToRows("   \n      \n")).toEqual([]);
-  });
-
-  test("convertStringToRows converts rows to cells", () => {
-    expect(
+  o("convertStringToRows converts rows to cells", () => {
+    o(
       convertStringToRows(
         "hahmo<timecode<repla<jakso<info\nKAD<01:00:35.12<Häh!\n",
         "10"
       )
-    ).toEqual([
+    ).deepEquals([
       ["hahmo", "timecode", "repla", "jakso", "info"],
       ["KAD", "01:00:35:12", "Häh!", "10"]
     ]);
