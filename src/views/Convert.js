@@ -1,90 +1,111 @@
-const m = require("mithril").default;
+import React from "react";
 
-const {
-  convertToWorkbook,
-  downloadWorkbook,
-  readFileAsText
-} = require("../utils");
+import { convertToWorkbook, downloadWorkbook, readFileAsText } from "../utils";
 
-const ConvertForm = {
-  episode: "",
-  inputContent: "",
-  inputFilename: "",
-  outputFilename: "output.xlsx",
+class Convert extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      episode: "",
+      inputContent: "",
+      inputFilename: "",
+      outputFilename: "output.xlsx"
+    };
+  }
 
-  onfilechange: async event => {
-    const inputFile = event.target.files[0];
-    ConvertForm.inputFilename = inputFile.name;
-    ConvertForm.inputContent = await readFileAsText(inputFile);
-  },
-
-  onclick: () => {
+  onDownloadClicked = () => {
     try {
       const outputWorkbook = convertToWorkbook(
-        ConvertForm.inputContent,
-        ConvertForm.episode
+        this.state.inputContent,
+        this.state.episode
       );
-      downloadWorkbook(outputWorkbook, ConvertForm.outputFilename);
+      downloadWorkbook(outputWorkbook, this.state.outputFilename);
     } catch (e) {
       alert(e.message);
     }
-  }
-};
+  };
 
-module.exports = {
-  view: () =>
-    m("section.section", [
-      m(".container", [
-        m("h1.title", "Upload a file"),
-        m("p", [
-          "This utility converts a file of text separated with ",
-          m("code", "<"),
-          " characters into separate columns in an Excel spreadsheet."
-        ]),
-        m("br"),
-        m(".field", [
-          m("label.label", "Text file"),
-          m(".file.has-name.is-fullwidth", [
-            m("label.file-label", [
-              m("input.file-input[name='file'][type='file']", {
-                onchange: ConvertForm.onfilechange
-              }),
-              m("span.file-cta", [m("span.file-label", "Choose a file")]),
-              m("span.file-name", ConvertForm.inputFilename)
-            ])
-          ])
-        ]),
-        m(".field", [
-          m("label.label", "Excel filename"),
-          m("div.control", [
-            m("input.input[placeholder='Optional'][type='text']", {
-              onchange: event => {
-                ConvertForm.outputFilename = event.target.value;
-              },
-              value: ConvertForm.outputFilename
-            })
-          ])
-        ]),
-        m(".field", [
-          m("label.label", "Episode"),
-          m(".control", [
-            m("input.input[placeholder='Optional'][type='text']", {
-              onchange: event => {
-                ConvertForm.episode = event.target.value;
-              },
-              value: ConvertForm.episode
-            })
-          ])
-        ]),
-        m(".field", [
-          m(".control", [
-            m(
-              "button.button.is-primary",
-              { onclick: ConvertForm.onclick },
-              "Download"
-            )
-          ])
-        ])
-      ])
-    ])
-};
+  onFileChanged = async event => {
+    const inputFile = event.target.files[0];
+    this.setState({
+      ...this.state,
+      inputContent: await readFileAsText(inputFile),
+      inputFilename: inputFile.name
+    });
+  };
+
+  render() {
+    return (
+      <section className="section">
+        <div className="container">
+          <h1 className="title">Upload a file</h1>
+          <p>
+            This utility converts a file of text separated with{" "}
+            <code>&lt;</code> characters into separate columns in an Excel
+            spreadsheet.
+          </p>
+          <br />
+          <div className="field">
+            <label className="label">Text file</label>
+            <div className="file has-name is-fullwidth">
+              <label className="file-label">
+                <input
+                  className="file-input"
+                  type="file"
+                  onChange={this.onFileChanged}
+                />
+                <span className="file-cta">
+                  <span className="file-label">Choose a file</span>
+                </span>
+                <span className="file-name">{this.state.inputFilename}</span>
+              </label>
+            </div>
+          </div>
+          <div className="field">
+            <label className="label">Excel filename</label>
+            <div className="control">
+              <input
+                className="input"
+                placeholder="Optional"
+                type="text"
+                onChange={event =>
+                  this.setState({
+                    ...this.state,
+                    outputFilename: event.target.value
+                  })
+                }
+                value={this.state.outputFilename}
+              />
+            </div>
+          </div>
+          <div className="field">
+            <label className="label">Episode</label>
+            <div className="control">
+              <input
+                className="input"
+                placeholder="Optional"
+                type="text"
+                onChange={event =>
+                  this.setState({ ...this.state, episode: event.target.value })
+                }
+                value={this.state.episode}
+              />
+            </div>
+          </div>
+          <div className="field">
+            <div className="control">
+              <button
+                className="button is-primary"
+                onClick={this.onDownloadClicked}
+              >
+                Download
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+}
+
+export default Convert;

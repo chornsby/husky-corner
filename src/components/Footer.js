@@ -1,17 +1,24 @@
-const m = require("mithril").default;
+import React from "react";
 
-module.exports = {
-  view: () =>
-    m("footer.footer", [
-      m(".container", [
-        m(".content.has-text-centered", [
-          m("strong", "Husky Corner"),
-          m("span", " by "),
-          m(
-            "a[href='https://gitlab.com/chornsby'][target='_blank']",
-            "chornsby"
-          )
-        ])
-      ])
-    ])
-};
+class Footer extends React.Component {
+  render() {
+    return (
+      <footer className="footer">
+        <div className="container">
+          <div className="content has-text-centered">
+            <strong>Husky Corner</strong> by{" "}
+            <a
+              href="https://gitlab.com/chornsby"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              chornsby
+            </a>
+          </div>
+        </div>
+      </footer>
+    );
+  }
+}
+
+export default Footer;

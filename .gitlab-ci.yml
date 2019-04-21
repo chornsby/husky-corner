@@ -19,6 +19,8 @@ pages:
   stage: deploy
   script:
     - npm run build
+    - mv public public-dev
+    - mv build public
   artifacts:
     paths:
       - public # artifact path must be /public for GitLab Pages to pick it up

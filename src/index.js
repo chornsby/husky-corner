@@ -1,12 +1,19 @@
-const m = require("mithril").default;
+import React from "react";
+import ReactDOM from "react-dom";
+import { HashRouter as Router, Route } from "react-router-dom";
+import "bulma/css/bulma.css";
 
-const bulma = require("bulma/css/bulma.css");
+import Footer from "./components/Footer";
+import Navbar from "./components/Navbar";
+import Convert from "./views/Convert";
+import Home from "./views/Home";
 
-const Convert = require("./views/Convert.js");
-const Home = require("./views/Home.js");
-const Layout = require("./components/Layout.js");
-
-m.route(document.body, "/", {
-  "/": { render: () => m(Layout, m(Home)) },
-  "/convert": { render: () => m(Layout, m(Convert)) }
-});
+ReactDOM.render(
+  <Router>
+    <Navbar />
+    <Route path="/" component={Home} exact />
+    <Route path="/convert/" component={Convert} />
+    <Footer />
+  </Router>,
+  document.getElementById("root")
+);
