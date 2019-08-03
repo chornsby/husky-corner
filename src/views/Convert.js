@@ -21,6 +21,11 @@ class Convert extends React.Component {
       );
       downloadWorkbook(outputWorkbook, this.state.outputFilename);
     } catch (e) {
+      this.setState({
+        ...this.state,
+        inputContent: "",
+        inputFilename: ""
+      });
       alert(e.message);
     }
   };
