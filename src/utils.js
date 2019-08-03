@@ -38,6 +38,9 @@ const convertRowToCells = (rowText, index, episode) => {
  * Convert a string into an array of rows and columns to write into a workbook.
  */
 const convertStringToRows = (inputContent, episode) => {
+  if (!inputContent.length) {
+    throw new Error("Choose a text file");
+  }
   return inputContent
     .split("\n")
     .map(row => row.trim())
