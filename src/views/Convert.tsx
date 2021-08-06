@@ -9,7 +9,7 @@ class Convert extends React.Component {
       episode: "",
       inputContent: "",
       inputFilename: "",
-      outputFilename: "output.xlsx"
+      outputFilename: "output.xlsx",
     };
   }
 
@@ -24,18 +24,18 @@ class Convert extends React.Component {
       this.setState({
         ...this.state,
         inputContent: "",
-        inputFilename: ""
+        inputFilename: "",
       });
       alert(e.message);
     }
   };
 
-  onFileChanged = async event => {
+  onFileChanged = async (event) => {
     const inputFile = event.target.files[0];
     this.setState({
       ...this.state,
       inputContent: await readFileAsText(inputFile),
-      inputFilename: inputFile.name
+      inputFilename: inputFile.name,
     });
   };
 
@@ -73,10 +73,10 @@ class Convert extends React.Component {
                 className="input"
                 placeholder="Optional"
                 type="text"
-                onChange={event =>
+                onChange={(event) =>
                   this.setState({
                     ...this.state,
-                    outputFilename: event.target.value
+                    outputFilename: event.target.value,
                   })
                 }
                 value={this.state.outputFilename}
@@ -90,7 +90,7 @@ class Convert extends React.Component {
                 className="input"
                 placeholder="Optional"
                 type="text"
-                onChange={event =>
+                onChange={(event) =>
                   this.setState({ ...this.state, episode: event.target.value })
                 }
                 value={this.state.episode}

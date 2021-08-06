@@ -3,7 +3,7 @@ import XLSX from "xlsx";
 /**
  * Convert a string into an array of columns for a single row in the output.
  */
-const convertRowToCells = (rowText, index, episode) => {
+const convertRowToCells = (rowText: string, index: number, episode: string) => {
   // Split using the delimiter as specified in the program
   const row = rowText.split("<");
 
@@ -37,21 +37,21 @@ const convertRowToCells = (rowText, index, episode) => {
 /**
  * Convert a string into an array of rows and columns to write into a workbook.
  */
-const convertStringToRows = (inputContent, episode) => {
+const convertStringToRows = (inputContent: string, episode: string) => {
   if (!inputContent.length) {
     throw new Error("Choose a text file");
   }
   return inputContent
     .split("\n")
-    .map(row => row.trim())
-    .filter(row => row)
+    .map((row) => row.trim())
+    .filter((row) => row)
     .map((row, index) => convertRowToCells(row, index, episode));
 };
 
 /**
  * Return an XLSX Workbook from the input file and options.
  */
-const convertToWorkbook = (inputContent, episode) => {
+const convertToWorkbook = (inputContent: string, episode: string) => {
   const workbook = XLSX.utils.book_new();
   const rows = convertStringToRows(inputContent, episode);
   const worksheet = XLSX.utils.aoa_to_sheet(rows);
@@ -66,7 +66,7 @@ const convertToWorkbook = (inputContent, episode) => {
  *
  * http://sheetjs.com/demos/table.html
  */
-const downloadWorkbook = (workbook, filename) => {
+const downloadWorkbook = (workbook: XLSX.WorkBook, filename: string) => {
   return XLSX.writeFile(workbook, filename);
 };
 
@@ -75,7 +75,7 @@ const downloadWorkbook = (workbook, filename) => {
  *
  * https://blog.shovonhasan.com/using-promises-with-filereader/
  */
-const readFileAsText = inputFile => {
+const readFileAsText = (inputFile: Blob) => {
   const reader = new FileReader();
 
   return new Promise((resolve, reject) => {
@@ -97,5 +97,5 @@ export {
   convertStringToRows,
   convertToWorkbook,
   downloadWorkbook,
-  readFileAsText
+  readFileAsText,
 };
