@@ -51,7 +51,10 @@ const convertStringToRows = (inputContent: string, episode: string) => {
 /**
  * Return an XLSX Workbook from the input file and options.
  */
-const convertToWorkbook = (inputContent: string, episode: string) => {
+const convertToWorkbook = (
+  inputContent: string,
+  episode: string
+): XLSX.WorkBook => {
   const workbook = XLSX.utils.book_new();
   const rows = convertStringToRows(inputContent, episode);
   const worksheet = XLSX.utils.aoa_to_sheet(rows);
@@ -75,7 +78,7 @@ const downloadWorkbook = (workbook: XLSX.WorkBook, filename: string) => {
  *
  * https://blog.shovonhasan.com/using-promises-with-filereader/
  */
-const readFileAsText = (inputFile: Blob) => {
+const readFileAsText = (inputFile: Blob): Promise<string> => {
   const reader = new FileReader();
 
   return new Promise((resolve, reject) => {
@@ -85,7 +88,7 @@ const readFileAsText = (inputFile: Blob) => {
     };
 
     reader.onload = () => {
-      resolve(reader.result);
+      resolve(reader.result as string);
     };
 
     reader.readAsText(inputFile);

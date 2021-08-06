@@ -41,7 +41,7 @@ describe("utils.mjs", () => {
   });
 
   test("convertStringToRows removes empty lines", () => {
-    expect(convertStringToRows("   \n      \n")).toEqual([]);
+    expect(convertStringToRows("   \n      \n", "")).toEqual([]);
   });
 
   test("convertStringToRows converts rows to cells", () => {

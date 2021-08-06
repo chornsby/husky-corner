@@ -2,8 +2,17 @@ import React from "react";
 
 import { convertToWorkbook, downloadWorkbook, readFileAsText } from "../utils";
 
-class Convert extends React.Component {
-  constructor(props) {
+type Props = {};
+
+type State = {
+  episode: string;
+  inputContent: string;
+  inputFilename: string;
+  outputFilename: string;
+};
+
+class Convert extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = {
       episode: "",
@@ -30,8 +39,10 @@ class Convert extends React.Component {
     }
   };
 
-  onFileChanged = async (event) => {
-    const inputFile = event.target.files[0];
+  onFileChanged = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const target = event.target as HTMLInputElement;
+    if (!target.files) return;
+    const inputFile = target.files[0];
     this.setState({
       ...this.state,
       inputContent: await readFileAsText(inputFile),
