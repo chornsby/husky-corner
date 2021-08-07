@@ -11,4 +11,8 @@ jobs:
           node-version: "14"
       - run: npm install
       - run: npm test
-      - run: npm run deploy
+      - run: |
+        git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+        npx gh-pages --dist build --user "github-actions-bot <support+actions@github.com>"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
