@@ -46,5 +46,8 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://husky.hornsby.fi"
+  "homepage": "https://husky.hornsby.fi",
+  "prettier": {
+    "proseWrap": "always"
+  }
 }
