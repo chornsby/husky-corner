@@ -1,4 +1,4 @@
-import { convertRowToCells, convertStringToRows } from "./utils.js";
+import { convertRowToCells, convertStringToRows } from "./utils.ts";
 
 describe("utils.mjs", () => {
   test("convertRowToCells converts header row", () => {
