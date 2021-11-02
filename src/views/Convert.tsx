@@ -35,7 +35,9 @@ class Convert extends React.Component<Props, State> {
         inputContent: "",
         inputFilename: "",
       });
-      alert(e.message);
+      if (e instanceof Error) {
+        alert(e.message);
+      }
     }
   };
 
