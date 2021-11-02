@@ -59,4 +59,19 @@ describe("utils.mjs", () => {
       ["KAD", "01:00:35:12", "Häh!", "10"],
     ]);
   });
+
+  test("convertStringToRows converts other formats to cells", () => {
+    expect(
+      convertStringToRows(
+        `timecode-start<timecode-end<character<line
+00.00:01:15<00:00:04:00<KAD<Häh!
+00:00.04:13<00:00:09.00<KAD<Häh!
+`
+      )
+    ).toEqual([
+      ["timecode-start", "timecode-end", "character", "line"],
+      ["00:00:01:15", "00:00:04:00", "KAD", "Häh!"],
+      ["00:00:04:13", "00:00:09:00", "KAD", "Häh!"],
+    ]);
+  });
 });

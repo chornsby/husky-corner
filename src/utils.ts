@@ -1,6 +1,11 @@
 import XLSX from "xlsx";
 
 /**
+ * A possibly-malformed timestamp where a ":" has been replaced with a ".".
+ */
+const TIMESTAMP = /(\d{2}[.:]){2,}\d{2}/;
+
+/**
  * Convert a string into an array of columns for a single row in the output.
  */
 const convertRowToCells = (
@@ -28,8 +33,12 @@ const convertRowToCells = (
       }
     }
 
-    // Fix timestamps
-    row[1] = row[1].replace(".", ":");
+    // Fix timestamps in initial 3 cells
+    for (let i = 0; i < 3; i++) {
+      if (TIMESTAMP.test(row[i])) {
+        row[i] = row[i].replace(".", ":");
+      }
+    }
 
     // Add in the episode number if it is given
     if (episode) {
