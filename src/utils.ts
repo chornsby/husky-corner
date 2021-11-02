@@ -3,7 +3,11 @@ import XLSX from "xlsx";
 /**
  * Convert a string into an array of columns for a single row in the output.
  */
-const convertRowToCells = (rowText: string, index: number, episode: string) => {
+const convertRowToCells = (
+  rowText: string,
+  index: number,
+  episode?: string
+) => {
   // Split using the delimiter as specified in the program
   const row = rowText.split("<");
 
@@ -27,8 +31,10 @@ const convertRowToCells = (rowText: string, index: number, episode: string) => {
     // Fix timestamps
     row[1] = row[1].replace(".", ":");
 
-    // Add in the episode number
-    row.splice(3, 1, episode);
+    // Add in the episode number if it is given
+    if (episode) {
+      row.splice(3, 1, episode);
+    }
   }
 
   return row;
@@ -37,7 +43,7 @@ const convertRowToCells = (rowText: string, index: number, episode: string) => {
 /**
  * Convert a string into an array of rows and columns to write into a workbook.
  */
-const convertStringToRows = (inputContent: string, episode: string) => {
+const convertStringToRows = (inputContent: string, episode?: string) => {
   if (!inputContent.length) {
     throw new Error("Choose a text file");
   }
